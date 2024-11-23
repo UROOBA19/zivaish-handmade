@@ -1,0 +1,993 @@
+<html>
+ <head>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="./g.css">
+  <style>
+   .sidebar {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .sidebar-open {
+            transform: translateX(0);
+        }
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+        }
+        .carousel-item {
+            flex: none;
+            scroll-snap-align: start;
+            width: 100%;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+        .card-actions{
+    text-align:right;
+
+}
+.proceed-to-cart{background-color:orchid;
+color: white;
+padding: 10px 20px;
+border:none ;
+border-radius: 5px;
+cursor:pointer ;
+
+}
+
+
+  </style>
+ </head>
+ <body class="font-roboto bg-white">
+  <!-- Top Bar -->
+  <div class="bg-purple-600 text-white text-center py-2">
+   Free Delivery for Orders above Rs 2999/-
+  </div>
+  <!-- Navigation Bar -->
+  <nav class="bg-white shadow-md">
+   <div class="container mx-auto px-4 flex items-center justify-between py-4">
+    <!-- Logo -->
+    <div class="flex items-center space-x-2">
+     <i class="fas fa-gem text-2xl">
+     </i>
+     <span class="text-2xl font-bold">
+      ZAVAISH
+     </span>
+    </div>
+    <!-- Hamburger Menu for Mobile -->
+    <div class="lg:hidden">
+     <button class="text-2xl focus:outline-none" id="menu-button">
+      <i class="fas fa-bars">
+      </i>
+     </button>
+    </div>
+    <!-- Navigation Links -->
+    <div class="hidden lg:flex items-center space-x-6 text-sm font-medium">
+     <a class="flex items-center space-x-1 text-yellow-500" href="#">
+      <i class="fas fa-star">
+      </i>
+      <span>
+       NEW ARRIVALS
+      </span>
+     </a>
+     <a class="flex items-center space-x-1 text-yellow-500" href="#">
+      <i class="fas fa-star">
+      </i>
+      <span>
+     11.11 SALE
+      </span>
+     </a>
+     <a class="flex items-center space-x-1 text-red-500" href="#">
+      </i>
+      <span>
+        FASHION
+      </span>
+     </a>
+     <a class="text-black" href="#">
+      HOME
+     </a>
+     <a class="text-black" href="#">
+      PRODUCTS
+     </a>
+    </div>
+    <!-- Icons -->
+    <div class="hidden lg:flex items-center space-x-4 text-xl">
+     <a href="#">
+      <i class="fas fa-search">
+      </i>
+     </a>
+     <a href="#">
+      <i class="fas fa-shopping-bag">
+      </i>
+     </a>
+     <a href="#">
+      <i class="fas fa-user">
+      </i>
+     </a>
+    </div>
+   </div>
+  </nav>
+  <!-- Sidebar for Mobile -->
+  <div class="fixed inset-y-0 left-0 bg-white w-64 shadow-lg sidebar lg:hidden" id="sidebar">
+   <div class="flex items-center justify-between p-4 border-b">
+    <div class="flex items-center space-x-2">
+     <i class="fas fa-gem text-2xl">
+     </i>
+     <span class="text-2xl font-bold">
+      ZAVAISH
+     </span>
+    </div>
+    <button class="text-2xl focus:outline-none" id="close-button">
+     <i class="fas fa-times">
+     </i>
+    </button>
+   </div>
+   <div class="flex flex-col p-4 space-y-4 text-sm font-medium">
+    <a class="flex items-center space-x-1 text-yellow-500" href="#">
+     <i class="fas fa-star">
+     </i>
+     <span>
+      NEW ARRIVALS
+     </span>
+    </a>
+    <a class="flex items-center space-x-1 text-yellow-500" href="#">
+     <i class="fas fa-star">
+     </i>
+     <span>
+      SUMMER SALE
+     </span>
+    </a>
+    <a class="flex items-center space-x-1 text-red-500" href="#">
+     <i class="fas fa-gift">
+     </i>
+     <span>
+      GIFT DEALS
+     </span>
+    </a>
+    <a class="text-black" href="#">
+     STATIONERY
+    </a>
+    <a class="text-black" href="#">
+     FASHION
+    </a>
+    <div class="flex items-center space-x-4 text-xl">
+     <a href="#">
+      <i class="fas fa-search">
+      </i>
+     </a>
+     <a href="#">
+      <i class="fas fa-shopping-bag">
+      </i>
+     </a>
+     <a href="#">
+      <i class="fas fa-user">
+      </i>
+     </a>
+    </div>
+   </div>
+  </div>
+  <!-- Carousel -->
+  <div class="carousel mt-4">
+    <div class="carousel-item">
+        <img alt="Placeholder image of a product with a white background and some text" class="w-full" height="400" src="./crousel1.jpg" width="1200"/>
+       </div>
+   <div class="carousel-item">
+    <img alt="Placeholder image of a product with a white background and some text" class="w-full" height="400" src="./crousel1.jpg" width="1200"/>
+   </div>
+   <div class="carousel-item">
+    <img alt="Placeholder image of a product with a white background and some text" class="w-full" height="400" src="./crousel1.jpg" width="1200"/>
+   </div>
+   
+  </div>
+  <!-- Products Section -->
+  <div class="container mx-auto px-4 py-8 relative">
+   <!-- Bag Icon -->
+   <div class="absolute top-4 right-4">
+    <button class="relative" onclick="openCartModal()">
+     <i class="fas fa-shopping-bag text-2xl">
+     </i>
+     <span class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center" id="cart-quantity">
+      0
+     </span>
+    </button>
+   </div>
+   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <!-- First Item -->
+    <div class="text-center border p-4 rounded-lg shadow-lg">
+     <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0010.jpg" width="200"/>
+     <p class="mt-2 font-bold">
+      Sunshine Earrings
+      <p class="mt-2 font-bold">
+        Rs 1200
+       </p>
+     </p>
+     <div class="mt-2 flex justify-center items-center">
+      <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(2700, 'Pair of pink oval earrings with a diamond border')">
+       -
+      </button>
+      <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(2700, 'Pair of pink oval earrings with a diamond border')">
+       Add to Cart
+      </button>
+      <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(2700, 'Pair of pink oval earrings with a diamond border')">
+       +
+      </button>
+     </div>
+    </div>
+    <!-- Second Item -->
+    <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0011.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 900
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(900, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(900, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(900, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+    <!-- Third Item -->
+    <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0012.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 600
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(600, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(600, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(600, 'Pair of pink sun Sunshin earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+    <!-- Fourth Item -->
+    <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0013.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1000
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(2700, 'Pair of pink sun Sunshin earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1000, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1000, 'Pair of pink sun Sunshine with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0014.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity( 1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0015.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0016.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0017.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0018.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0019.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0020.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0021.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0022.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(2700, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0023.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0024.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 2,700
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0025.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(2700, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0026.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+            1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0027.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0029.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0030.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0031.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0032.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0033.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+            1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0034.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0035.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(2700, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0036.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0037.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(2700, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0038.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(2700, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0039.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0040.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 2,700
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(2700, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(2700, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(2700, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0041.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0042.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0043.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+       <div class="text-center border p-4 rounded-lg shadow-lg">
+        <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto cursor-pointer" height="200" onclick="openModal('modal1')" src="./IMG-20241105-WA0045.jpg" width="200"/>
+        <p class="mt-2 font-bold">
+         Rs 1200
+        </p>
+        <div class="mt-2 flex justify-center items-center">
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-l" onclick="decreaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          -
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4" onclick="addToCart(1200, 'Pair of pink oval earrings with a diamond border')">
+          Add to Cart
+         </button>
+         <button class="bg-purple-500 text-white py-2 px-4 rounded-r" onclick="increaseQuantity(1200, 'Pair of pink oval earrings with a diamond border')">
+          +
+         </button>
+        </div>
+       </div>
+   </div>
+  </div>
+  <!-- Modals -->
+  <div class="modal" id="modal1">
+   <div class="modal-content">
+    <span class="close" onclick="closeModal('modal1')">
+     ×
+    </span>
+    <img alt="Pair of pink oval earrings with a diamond border" class="mx-auto" height="200" src="./IMG-20241105-WA0010.jpg" width="200"/>
+    <p class="mt-2 font-bold">
+     Rs 1200
+    </p>
+    <p>
+     Product details for the Sunshine Earrings
+    </p>
+   </div>
+  </div>
+  <div class="modal" id="modal2">
+   <div class="modal-content">
+    <span class="close" onclick="closeModal('modal2')">
+     ×
+    </span>
+    <img alt="Pair of blue round earrings with a silver border" class="mx-auto" height="200" src="./IMG-20241105-WA0014.jpg" width="200"/>
+    <p class="mt-2 font-bold">
+     Rs 900
+    </p>
+    <p>
+        Product details for the Sunshine Earrings
+    </p>
+   </div>
+  </div>
+  <div class="modal" id="modal3">
+   <div class="modal-content">
+    <span class="close" onclick="closeModal('modal3')">
+     ×
+    </span>
+    <img alt="Pair of clear teardrop earrings with a silver border" class="mx-auto" height="200" src="./IMG-20241105-WA0012.jpg" width="200"/>
+    <p class="mt-2 font-bold">
+     Rs 600
+    </p>
+    <p>
+  
+    </p>
+   </div>
+  </div>
+  <div class="modal" id="modal4">
+   <div class="modal-content">
+    <span class="close" onclick="closeModal('modal4')">
+     ×
+    </span>
+    <img alt="Pair of square hoop earrings with a diamond border" class="mx-auto" height="200" src="./IMG-20241105-WA0015.jpg" width="200"/>
+    <p class="mt-2 font-bold">
+     Rs 1200
+    </p>
+    <p>
+   
+    </p>
+   </div>
+  </div>
+  <!-- Cart Modal -->
+  <div class="modal" id="cartModal">
+   <div class="modal-content">
+    <span class="close" onclick="closeCartModal()">
+     ×
+    </span>
+    <h2 class="text-xl font-bold mb-4">
+     Shopping Cart
+    </h2>
+    <div id="cartItems">
+    </div>
+    <p class="mt-4 font-bold">
+     Total: Rs
+     <span id="cartTotal">
+      0
+     </span>
+
+    </p>
+    <div class="card-actions"><button class ="proceed-to-cart" id="proceed-to-cart">proceed to </button></div>
+   
+    
+   </div>
+  </div>
+  <script>
+
+
+   const menuButton = document.getElementById('menu-button');
+        const closeButton = document.getElementById('close-button');
+        const sidebar = document.getElementById('sidebar');
+
+        menuButton.addEventListener('click', () => {
+            sidebar.classList.add('sidebar-open');
+        });
+
+        closeButton.addEventListener('click', () => {
+            sidebar.classList.remove('sidebar-open');
+        });
+
+        let cart = [];
+        let total = 0;
+
+        function addToCart(price, description) {
+            const existingItem = cart.find(item => item.description === description);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ price, description, quantity: 1 });
+            }
+            total += price;
+            document.getElementById('cart-quantity').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+            updateCartModal();
+        }
+
+        function removeFromCart(index) {
+            total -= cart[index].price * cart[index].quantity;
+            cart.splice(index, 1);
+            document.getElementById('cart-quantity').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+            updateCartModal();
+        }
+
+        function increaseQuantity(price, description) {
+            const existingItem = cart.find(item => item.description === description);
+            if (existingItem) {
+                existingItem.quantity += 1;
+                total += price;
+                document.getElementById('cart-quantity').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+                updateCartModal();
+            }
+        }
+
+        function decreaseQuantity(price, description) {
+            const existingItem = cart.find(item => item.description === description);
+            if (existingItem && existingItem.quantity > 0) {
+                existingItem.quantity -= 1;
+                total -= price;
+                if (existingItem.quantity === 0) {
+                    cart = cart.filter(item => item.description !== description);
+                }
+                document.getElementById('cart-quantity').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+                updateCartModal();
+            }
+        }
+
+        function updateCartModal() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+            cart.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('flex', 'justify-between', 'items-center', 'mb-2');
+                itemElement.innerHTML = `
+                    <p>${item.description}: Rs ${item.price} x ${item.quantity}</p>
+                    <div>
+                        <button class="bg-green-500 text-white py-1 px-2 rounded" onclick="increaseQuantity(${item.price}, '${item.description}')">+</button>
+                        <button class="bg-red-500 text-white py-1 px-2 rounded" onclick="decreaseQuantity(${item.price}, '${item.description}')">-</button>
+                    </div>
+                `;
+                cartItems.appendChild(itemElement);
+            });
+            document.getElementById('cartTotal').innerText = total;
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        function openCartModal() {
+            document.getElementById('cartModal').style.display = "block";
+        }
+
+        function closeCartModal() {
+            document.getElementById('cartModal').style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+            document.getElementById("proceed-to-cart").addEventListener("click", function() {
+    alert("Proceed successfully")
+    window.open("thankyou.html");
+});
+
+
+
+        }
+  </script>
+ </body>
+</html>
